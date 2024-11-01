@@ -1,29 +1,29 @@
-import os
 import openai
+import os
 import requests
 from dotenv import dotenv_values
 
 # Set up OpenAI credentials
-
 CONFIG = dotenv_values(".env")
 
-OPEN_AI_KEY = CONFIG["KEY"] or os.environ["OPEN_AI_KEY"]
-OPEN_AI_ORG = CONFIG["ORG"] or os.environ["OPEN_AI_ORG"]
+OPEN_AI_KEY = CONFIG.get("KEY") or os.environ.get("OPEN_AI_KEY")
+OPEN_AI_ORG = CONFIG.get("ORG") or os.environ.get("OPEN_AI_ORG")
 
 openai.api_key = OPEN_AI_KEY
 openai.organization = OPEN_AI_ORG
 
-def load_file(filename: str = "") -> str:
-    """Loads an arbitrary file name"""
+def load_file(filename: str) -> str:
+    """Loads content from a specified file"""
     with open(filename, "r") as fh:
         return fh.read()
 
-# Function to generate image using DALL-E
+# Updated function to generate image using the latest DALL-E API syntax
 def generate_image_prompt(description):
     response = openai.images.generate(
         model="dall-e-3",
         prompt=description,
-        n=1
+        n=1,
+        size="1024x1024"
     )
     return response.data[0].url
 
@@ -37,18 +37,17 @@ def save_image(image_url, save_path):
         print(f"Failed to download image, status code: {response.status_code}")
 
 def main():
-    # Load prompt file
-    prompt = load_file("prompt.txt")
-    
-    # Generate image
-    image_url = generate_image_prompt(prompt)
+    num_images = 12  # Set to the number of panels
+    for i in range(1, num_images + 1):
+        prompt_filename = f"prompts/prompt_{i}.txt"
+        prompt = load_file(prompt_filename)
 
-    num_images = 2
-    for i in range(num_images):
-        image_prompt = f"{prompt} - Part {i + 1}"
-        image_url = generate_image_prompt(image_prompt)
-        #print(f"Image {i + 1}: {image_url}")
-        save_image(image_url, f"img/image_{i + 1}.png")
+        # Generate image
+        image_url = generate_image_prompt(prompt)
+
+        # Save image
+        save_image(image_url, f"img/panel_{i}.png")
+        print(f"Generated and saved image for Panel {i}")
 
 if __name__ == "__main__":
     main()

@@ -1,4 +1,4 @@
-# `TODO`: "Title Comic"
+# Title: The Lost Key
 
 ![img](../src/img/panel_1.png)
 

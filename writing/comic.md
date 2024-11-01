@@ -1,10 +1,25 @@
 # `TODO`: "Title Comic"
 
-`TODO`: Use `image` Markdown tags to sequence your images to create
-your overall narrative. These _may_ (should, kinda?) include some
-gesture toward text -- even if placed on the images by the author
-and not the generator.
+![img](panel_1.png)
 
-This comic should include at _least_ `12` images. Bonus points (not
-really, but you get the idea) for laying out or arranging a comic
-format.
+![img](panel_2.png)
+
+![img](panel_3.png)
+
+![img](panel_4.png)
+
+![img](panel_5.png)
+
+![img](panel_6.png)
+
+![img](panel_7.png)
+
+![img](panel_8.png)
+
+![img](panel_9.png)
+
+![img](panel_10.png)
+
+![img](panel_11.png)
+
+![img](panel_12.png)
